@@ -47,20 +47,13 @@ namespace FullStackRibShack.Data
             
             try
             {
-
-                //var nextFiveEvents = db.Query<Schedule>
-                //    ("DECLARE @TodaysDate DateTime " +
-                //    "SET @TodaysDate = GetDate() " +
-                //    "SELECT *" +
-                //    "FROM Schedule " +
-                //    "WHERE Date >= @TodaysDate");
-
                 var nextFiveEvents = db.Query<Schedule>
-                   ("DECLARE @TodaysDate DateTime " +
-                   "SET @TodaysDate = Test " +
-                   "SELECT *" +
-                   "FROM Schedule " +
-                   "WHERE Date >= @TodaysDate");
+                    ("DECLARE @TodaysDate DateTime " +
+                    "SET @TodaysDate = GetDate() " +
+                    "SELECT *" +
+                    "FROM Schedule " +
+                    "WHERE Date >= @TodaysDate " +
+                    "Order By Date");
 
                 return nextFiveEvents.ToList();
             }
