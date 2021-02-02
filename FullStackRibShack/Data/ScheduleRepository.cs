@@ -10,22 +10,56 @@ namespace FullStackRibShack.Data
 {
     public class ScheduleRepository
     {
+
         const string _connectionString = "Server = localhost; Database = FullStackRibShack; Trusted_Connection = True;";
 
+
+        // returns all events from Schedule table
         public List<Schedule> GetAll()
         {
             using var db = new SqlConnection(_connectionString);
 
             try
             {
-                var fullSchedule = db.Query<Schedule>("SELECT * FROM Schedule");
+                var fullSchedule = db.Query<Schedule>
+
+                    ("SELECT * " +
+                    "FROM Schedule " +
+                    "ORDER BY Date ASC");
 
                 return fullSchedule.ToList();
             }
+
             catch (Exception e)
             {
                 Console.WriteLine(e);
                 throw;
+            }
+        }
+
+
+        // returns next five events which will include today's event if there is one
+        public List<Schedule> GetNextFiveEvents()
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            try
+            {
+                var nextFiveEvents = db.Query<Schedule>
+                 ("DECLARE @TestTodaysDate DateTime "
+                 + "SET @TestTodaysDate = DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) "
+                 + "SELECT TOP 5 * "
+                 + "FROM Schedule "
+                 + "WHERE Date >= @TestTodaysDate "
+                 + "ORDER BY Date ASC");
+
+                return nextFiveEvents.ToList();
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw; 
             }
         }
     }

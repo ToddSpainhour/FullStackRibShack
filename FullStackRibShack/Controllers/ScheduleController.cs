@@ -26,5 +26,13 @@ namespace FullStackRibShack.Controllers
 
             return Ok(FullSchedule);
         }
+
+        [HttpGet("{nextFiveScheduledEvents}")]
+        public IActionResult GetNextFiveScheduledEvents()
+        {
+            var NextFiveEvents = _repo.GetNextFiveEvents();
+
+            return Ok(NextFiveEvents);
+        }
     }
 }
