@@ -19,6 +19,7 @@ namespace FullStackRibShack.Controllers
             _repo = repo;
         }
 
+
         [HttpGet]
         public IActionResult GetFullSchedule()
         {
@@ -27,12 +28,22 @@ namespace FullStackRibShack.Controllers
             return Ok(FullSchedule);
         }
 
+
         [HttpGet("{nextFiveScheduledEvents}")]
         public IActionResult GetNextFiveScheduledEvents()
         {
             var NextFiveEvents = _repo.GetNextFiveEvents();
 
             return Ok(NextFiveEvents);
+        }
+
+
+        [HttpGet("allFutureEvents")]
+        public IActionResult GetAllFutureEvents()
+        {
+            var allFutureEvents = _repo.GetFutureEvents();
+
+            return Ok(allFutureEvents);
         }
     }
 }

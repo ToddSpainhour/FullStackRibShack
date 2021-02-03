@@ -46,11 +46,11 @@ namespace FullStackRibShack.Data
             try
             {
                 var nextFiveEvents = db.Query<Schedule>
-                 ("DECLARE @TestTodaysDate DateTime "
-                 + "SET @TestTodaysDate = DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) "
+                 ("DECLARE @TodaysDate DateTime "
+                 + "SET @TodaysDate = DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) "
                  + "SELECT TOP 5 * "
                  + "FROM Schedule "
-                 + "WHERE Date >= @TestTodaysDate "
+                 + "WHERE Date >= @TodaysDate "
                  + "ORDER BY Date ASC");
 
                 return nextFiveEvents.ToList();
@@ -60,6 +60,31 @@ namespace FullStackRibShack.Data
             {
                 Console.WriteLine(e);
                 throw; 
+            }
+        }
+
+
+        // returns all future events including today's event if there is one
+        public List<Schedule> GetFutureEvents()
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            try
+            {
+                var allFutureEvents = db.Query<Schedule>
+                 ("DECLARE @TodaysDate DateTime "
+                 + "SET @TodaysDate = DATEADD(dd, 0, DATEDIFF(dd, 0, GETDATE())) "
+                 + "SELECT * "
+                 + "FROM Schedule "
+                 + "WHERE Date >= @TodaysDate "
+                 + "ORDER BY Date ASC");
+
+                return allFutureEvents.ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
             }
         }
     }
