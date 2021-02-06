@@ -88,26 +88,51 @@ namespace FullStackRibShack.Data
             }
         }
 
-        public List<Schedule> Add(Schedule scheduleToAdd)
+
+        public Schedule Add(Schedule scheduledEventToAdd)
         {
             using var db = new SqlConnection(_connectionString);
 
             try
             {
-                var addNewScheduledEvent = db.Query<Schedule> // getting error "near @ScheduleToInsert"
-                    ("DECLARE @ScheduleToInsert Schedule" +
-                    "SET @ScheduleToInsert = scheduleToAdd" +
-                    "INSERT INTO Schedule" +
-                    "VALUES @ScheduleToInsert");
+                //you'll need this i bet CAST('2021-February-02' AS datetime)
+                // has this above values OUTPUT INSERTED.Id
 
-                return addNewScheduledEvent.ToList();
+                var sql = @"INSERT INTO [dbo].[Schedule]
+                        ([Location],
+                        [Date],
+                        [TimeOpen],
+                        [TimeClosed],
+                        [EventCanceled])
+                        VALUES 
+                        (@location,  
+                        @date, 
+                        @timeOpen, 
+                        @timeClosed,  
+                        @eventCanceled)";
+
+
+                var newEventparameters = new
+                {
+                    location = scheduledEventToAdd.Location,
+                    date = scheduledEventToAdd.Date,
+                    timeOpen = scheduledEventToAdd.TimeOpen,
+                    timeClosed = scheduledEventToAdd.TimeClosed,
+                    eventCanceled = scheduledEventToAdd.EventCanceled
+                };
+
+                var newScheduledEvent = db.QueryFirstOrDefault<Schedule>(sql, newEventparameters);
+
+
+                return newScheduledEvent;
+
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
                 throw;
             }
-            
+
         }
     }
 }

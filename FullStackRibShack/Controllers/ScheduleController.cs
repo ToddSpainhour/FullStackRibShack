@@ -47,11 +47,11 @@ namespace FullStackRibShack.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateNewScheduledEvent(Schedule schedule)
+        public IActionResult CreateNewScheduledEvent(Schedule scheduledEventToAdd)
         {
-            var newScheduledEvent = _repo.Add(schedule);
+            _repo.Add(scheduledEventToAdd);
 
-            return Created($"api/schedule/{schedule.Id}", schedule);
+            return Created($"/api/schedule/", scheduledEventToAdd);
         }
     }
 }
