@@ -87,5 +87,27 @@ namespace FullStackRibShack.Data
                 throw;
             }
         }
+
+        public List<Schedule> Add(Schedule scheduleToAdd)
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            try
+            {
+                var addNewScheduledEvent = db.Query<Schedule> // getting error "near @ScheduleToInsert"
+                    ("DECLARE @ScheduleToInsert Schedule" +
+                    "SET @ScheduleToInsert = scheduleToAdd" +
+                    "INSERT INTO Schedule" +
+                    "VALUES @ScheduleToInsert");
+
+                return addNewScheduledEvent.ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            
+        }
     }
 }
