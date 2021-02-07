@@ -45,5 +45,13 @@ namespace FullStackRibShack.Controllers
 
             return Ok(allFutureEvents);
         }
+
+        [HttpPost]
+        public IActionResult CreateNewScheduledEvent(Schedule scheduledEventToAdd)
+        {
+            _repo.Add(scheduledEventToAdd);
+
+            return Created($"/api/schedule/", scheduledEventToAdd);
+        }
     }
 }

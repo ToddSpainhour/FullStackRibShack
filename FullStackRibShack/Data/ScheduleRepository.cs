@@ -87,5 +87,52 @@ namespace FullStackRibShack.Data
                 throw;
             }
         }
+
+
+
+        // add new scheduled event
+        public Schedule Add(Schedule scheduledEventToAdd)
+        {
+            using var db = new SqlConnection(_connectionString);
+
+            try
+            {
+
+                var sql = @"INSERT INTO [dbo].[Schedule]
+                        ([Location],
+                        [Date],
+                        [TimeOpen],
+                        [TimeClosed],
+                        [EventCanceled])
+                        VALUES 
+                        (@location,  
+                        @date, 
+                        @timeOpen, 
+                        @timeClosed,  
+                        @eventCanceled)";
+
+
+                var newEventparameters = new {
+                    location = scheduledEventToAdd.Location,
+                    date = scheduledEventToAdd.Date,
+                    timeOpen = scheduledEventToAdd.TimeOpen,
+                    timeClosed = scheduledEventToAdd.TimeClosed,
+                    eventCanceled = scheduledEventToAdd.EventCanceled };
+
+                var newScheduledEvent = db.QueryFirstOrDefault<Schedule>(sql, newEventparameters);
+
+
+                return newScheduledEvent;
+
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e);
+                throw;
+
+            }
+
+        }
     }
 }
