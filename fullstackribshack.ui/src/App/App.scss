@@ -1,0 +1,26 @@
+@import '../styles/variables';
+
+
+.App {
+  
+  display: block;
+
+  .title {
+  color: $color-2;
+  display: flex;
+  justify-content: center;
+  }
+
+  .test-btn-container {
+    color: $color-5;
+    display: flex;
+    justify-content: center;
+
+    .test-btn {
+      background-color: $color-1;
+      color: $color-5
+    }
+  }
+
+}
+
