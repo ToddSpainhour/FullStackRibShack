@@ -89,14 +89,14 @@ namespace FullStackRibShack.Data
         }
 
 
+
+        // add new scheduled event
         public Schedule Add(Schedule scheduledEventToAdd)
         {
             using var db = new SqlConnection(_connectionString);
 
             try
             {
-                //you'll need this i bet CAST('2021-February-02' AS datetime)
-                // has this above values OUTPUT INSERTED.Id
 
                 var sql = @"INSERT INTO [dbo].[Schedule]
                         ([Location],
@@ -112,14 +112,12 @@ namespace FullStackRibShack.Data
                         @eventCanceled)";
 
 
-                var newEventparameters = new
-                {
+                var newEventparameters = new {
                     location = scheduledEventToAdd.Location,
                     date = scheduledEventToAdd.Date,
                     timeOpen = scheduledEventToAdd.TimeOpen,
                     timeClosed = scheduledEventToAdd.TimeClosed,
-                    eventCanceled = scheduledEventToAdd.EventCanceled
-                };
+                    eventCanceled = scheduledEventToAdd.EventCanceled };
 
                 var newScheduledEvent = db.QueryFirstOrDefault<Schedule>(sql, newEventparameters);
 
@@ -129,8 +127,10 @@ namespace FullStackRibShack.Data
             }
             catch (Exception e)
             {
+
                 Console.WriteLine(e);
                 throw;
+
             }
 
         }
