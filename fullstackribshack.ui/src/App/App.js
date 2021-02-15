@@ -1,3 +1,5 @@
+import Schedule from '../components/Schedule/Schedule';
+
 import './App.scss';
 
 function App() {
@@ -7,6 +9,7 @@ function App() {
       <div className="test-btn-container">
         <button className="btn btn-warning test-btn">Test Button</button>
       </div>
+      <Schedule />
     </div>
   );
 }
