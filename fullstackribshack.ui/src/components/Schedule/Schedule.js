@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import baseUrl from '../../helpers/data/constants';
+import SingleScheduleCard from '../SingleScheduleCard/SingleScheduleCard';
 
 import './Schedule.scss';
 
@@ -17,15 +18,24 @@ function Schedule() {
       .catch((error) => console.error(`Error: ${error}`));
   };
 
+  let printScheduleCards;
+
   useEffect(() => {
     getAllScheduledEvents();
   }, []);
 
   if (events.length > 0) {
+    printScheduleCards = events.map((event) => (
+      <SingleScheduleCard event={event} key={event.id}/>
+    ));
+  } else {
+    return <h3>Loading...</h3>;
+  }
+
+  if (events.length > 0) {
     return (
       <div className="Schedule">
-          <h6>Schedule component</h6>
-          <h6>{events[0].timeOpen}</h6>
+          {printScheduleCards}
       </div>
     );
   }
