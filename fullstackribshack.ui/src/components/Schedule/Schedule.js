@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
 import scheduleData from '../../helpers/data/scheduleData';
-// import baseUrl from '../../helpers/data/constants';
 import SingleScheduleCard from '../SingleScheduleCard/SingleScheduleCard';
 
 import './Schedule.scss';
