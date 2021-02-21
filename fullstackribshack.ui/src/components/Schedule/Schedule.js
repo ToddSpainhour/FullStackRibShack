@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import baseUrl from '../../helpers/data/constants';
+// import axios from 'axios';
+import scheduleData from '../../helpers/data/scheduleData';
+// import baseUrl from '../../helpers/data/constants';
 import SingleScheduleCard from '../SingleScheduleCard/SingleScheduleCard';
 
 import './Schedule.scss';
@@ -9,11 +10,9 @@ function Schedule() {
   const [events, setAllScheduledEvents] = useState('');
 
   const getAllScheduledEvents = () => {
-    axios.get(`${baseUrl}/schedule`)
-
+    scheduleData.getAllScheduledEvents()
       .then((response) => {
-        const AllEvents = response.data;
-        setAllScheduledEvents(AllEvents);
+        setAllScheduledEvents(response);
       })
       .catch((error) => console.error(`Error: ${error}`));
   };
