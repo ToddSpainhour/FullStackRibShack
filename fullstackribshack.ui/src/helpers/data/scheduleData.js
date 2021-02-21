@@ -1,9 +1,9 @@
 import axios from 'axios';
 import baseUrl from './constants';
 
-const getAllScheduledEvents = () => new Promise((resolve, reject) => {
+const getNextFiveScheduledEvents = () => new Promise((resolve, reject) => {
   let AllEvents = [];
-  axios.get(`${baseUrl}/schedule`)
+  axios.get(`${baseUrl}/schedule/nextFiveScheduledEvents`)
     .then((response) => {
       AllEvents = response.data;
       resolve(AllEvents);
@@ -11,4 +11,4 @@ const getAllScheduledEvents = () => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-export default { getAllScheduledEvents };
+export default { getNextFiveScheduledEvents };
