@@ -1,0 +1,13 @@
+@import '../../styles/variables';
+
+.myCard {
+  text-align: center;
+  margin: 20px;
+  color: $color-1;
+  background-color: $color-4;
+  border-radius: 25px;
+
+  .location {
+    font-weight: 600;
+  }
+}

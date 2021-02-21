@@ -1,14 +1,14 @@
 import React from 'react';
 
-import '../../styles/_variables.scss';
+import './SingleScheduleCard.scss';
 
 function SingleScheduleCard(props) {
   return (
-    <div>
-    <p>{props.event.location}</p>
-    <p>{props.event.date}</p>
-    <p>{props.event.timeOpen}</p>
-    <p>{props.event.timeClosed}</p>
+    <div className="SingleScheduleCard col-md-2 col-sm-12 myCard">
+      <p className="location">{props.event.location}</p>
+      <p>{props.event.date.slice(0, 10)}</p>
+      <p>Time Open: {props.event.timeOpen}</p>
+      <p>Time Closed: {props.event.timeClosed}</p>
     </div>
   );
 }
