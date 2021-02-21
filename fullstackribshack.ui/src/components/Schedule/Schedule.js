@@ -7,12 +7,12 @@ import SingleScheduleCard from '../SingleScheduleCard/SingleScheduleCard';
 import './Schedule.scss';
 
 function Schedule() {
-  const [events, setAllScheduledEvents] = useState('');
+  const [nextFiveScheduledEvents, setNextFiveScheduledEvents] = useState('');
 
-  const getAllScheduledEvents = () => {
-    scheduleData.getAllScheduledEvents()
+  const getNextFiveEvents = () => {
+    scheduleData.getNextFiveScheduledEvents()
       .then((response) => {
-        setAllScheduledEvents(response);
+        setNextFiveScheduledEvents(response);
       })
       .catch((error) => console.error(`Error: ${error}`));
   };
@@ -20,18 +20,18 @@ function Schedule() {
   let printScheduleCards;
 
   useEffect(() => {
-    getAllScheduledEvents();
+    getNextFiveEvents();
   }, []);
 
-  if (events.length > 0) {
-    printScheduleCards = events.map((event) => (
+  if (nextFiveScheduledEvents.length > 0) {
+    printScheduleCards = nextFiveScheduledEvents.map((event) => (
       <SingleScheduleCard event={event} key={event.id}/>
     ));
   } else {
     return <h3>Loading...</h3>;
   }
 
-  if (events.length > 0) {
+  if (nextFiveScheduledEvents.length > 0) {
     return (
       <div className="Schedule">
         <div className="schedule-greeting">
