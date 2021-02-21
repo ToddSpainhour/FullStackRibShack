@@ -2,6 +2,14 @@
 
 .Schedule {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  background-color: $color-4;
+  background-color: $color-1;
+
+  .schedule-greeting {
+    text-align: center;
+    width: 100%;
+    padding: 10px;
+    background-color: $color-4;
+  }
 }
