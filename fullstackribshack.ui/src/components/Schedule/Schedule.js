@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import baseUrl from '../../helpers/data/constants';
+import scheduleData from '../../helpers/data/scheduleData';
 import SingleScheduleCard from '../SingleScheduleCard/SingleScheduleCard';
 
 import './Schedule.scss';
 
 function Schedule() {
-  const [events, setAllScheduledEvents] = useState('');
+  const [nextFiveScheduledEvents, setNextFiveScheduledEvents] = useState('');
 
-  const getAllScheduledEvents = () => {
-    axios.get(`${baseUrl}/schedule`)
-
+  const getNextFiveEvents = () => {
+    scheduleData.getNextFiveScheduledEvents()
       .then((response) => {
-        const AllEvents = response.data;
-        setAllScheduledEvents(AllEvents);
+        setNextFiveScheduledEvents(response);
       })
       .catch((error) => console.error(`Error: ${error}`));
   };
@@ -21,18 +18,18 @@ function Schedule() {
   let printScheduleCards;
 
   useEffect(() => {
-    getAllScheduledEvents();
+    getNextFiveEvents();
   }, []);
 
-  if (events.length > 0) {
-    printScheduleCards = events.map((event) => (
+  if (nextFiveScheduledEvents.length > 0) {
+    printScheduleCards = nextFiveScheduledEvents.map((event) => (
       <SingleScheduleCard event={event} key={event.id}/>
     ));
   } else {
     return <h3>Loading...</h3>;
   }
 
-  if (events.length > 0) {
+  if (nextFiveScheduledEvents.length > 0) {
     return (
       <div className="Schedule">
         <div className="schedule-greeting">
