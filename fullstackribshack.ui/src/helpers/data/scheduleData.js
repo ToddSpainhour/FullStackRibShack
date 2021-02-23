@@ -11,4 +11,14 @@ const getNextFiveScheduledEvents = () => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-export default { getNextFiveScheduledEvents };
+const getAllFutureScheduledEvents = () => new Promise((resolve, reject) => {
+  let AllFutureEvents = [];
+  axios.get(`${baseUrl}/schedule/allFutureEvents`)
+    .then((response) => {
+      AllFutureEvents = response.data;
+      resolve(AllFutureEvents);
+    })
+    .catch((error) => reject(error));
+});
+
+export default { getNextFiveScheduledEvents, getAllFutureScheduledEvents };
