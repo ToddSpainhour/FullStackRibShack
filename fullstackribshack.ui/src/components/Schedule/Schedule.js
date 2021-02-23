@@ -6,6 +6,7 @@ import './Schedule.scss';
 
 function Schedule() {
   const [nextFiveScheduledEvents, setNextFiveScheduledEvents] = useState('');
+  const [allFutureEvents, setAllFutureEvents] = useState('');
 
   const getNextFiveEvents = () => {
     scheduleData.getNextFiveScheduledEvents()
@@ -13,6 +14,18 @@ function Schedule() {
         setNextFiveScheduledEvents(response);
       })
       .catch((error) => console.error(`Error: ${error}`));
+  };
+
+  const getAllFutureEvents = () => {
+    scheduleData.getAllFutureScheduledEvents()
+      .then((response) => {
+        setAllFutureEvents(response);
+      })
+      .catch((error) => console.error(`Error: ${error}`));
+  };
+
+  const handleAllFutureEvents = (e) => {
+    console.error('you clicked the see all future events button that fired the handleAllFutureEvents function');
   };
 
   let printScheduleCards;
@@ -36,6 +49,9 @@ function Schedule() {
           <h5>Check out our Schedule</h5>
         </div>
           {printScheduleCards}
+          <div>
+            <button onClick={handleAllFutureEvents} className="btn btn-light see-more-scheduled-events-btn">See More Events</button>
+          </div>
       </div>
     );
   }
