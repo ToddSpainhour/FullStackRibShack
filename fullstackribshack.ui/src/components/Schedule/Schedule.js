@@ -7,6 +7,8 @@ import './Schedule.scss';
 function Schedule() {
   const [nextFiveScheduledEvents, setNextFiveScheduledEvents] = useState('');
   const [allFutureEvents, setAllFutureEvents] = useState('');
+  // eslint-disable-next-line prefer-const
+  let [onlyViewingNextFiveEvents, setOnlyViewingNextFiveEvents] = useState(true);
 
   const getNextFiveEvents = () => {
     scheduleData.getNextFiveScheduledEvents()
@@ -24,25 +26,35 @@ function Schedule() {
       .catch((error) => console.error(`Error: ${error}`));
   };
 
-  const handleAllFutureEvents = (e) => {
-    console.error('you clicked the see all future events button that fired the handleAllFutureEvents function');
+  const handleAllFutureEvents = () => {
+    setOnlyViewingNextFiveEvents(() => !onlyViewingNextFiveEvents);
+  };
+
+  const currentScheduleView = () => {
+    if (onlyViewingNextFiveEvents === true) {
+      getNextFiveEvents();
+    } else {
+      getAllFutureEvents();
+    }
   };
 
   let printScheduleCards;
 
   useEffect(() => {
-    getNextFiveEvents();
-  }, []);
+    currentScheduleView();
+  }, [onlyViewingNextFiveEvents]);
 
-  if (nextFiveScheduledEvents.length > 0) {
+  if (onlyViewingNextFiveEvents === true && nextFiveScheduledEvents.length > 0) {
     printScheduleCards = nextFiveScheduledEvents.map((event) => (
       <SingleScheduleCard event={event} key={event.id}/>
     ));
+  } else if (onlyViewingNextFiveEvents === false && allFutureEvents.length > 0) {
+    printScheduleCards = allFutureEvents.map((event) => (<SingleScheduleCard event={event} key={event.id}/>));
   } else {
     return <h3>Loading...</h3>;
   }
 
-  if (nextFiveScheduledEvents.length > 0) {
+  if (nextFiveScheduledEvents.length > 0 || allFutureEvents.length > 0) {
     return (
       <div className="Schedule">
         <div className="schedule-greeting">
