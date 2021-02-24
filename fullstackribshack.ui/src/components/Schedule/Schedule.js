@@ -60,9 +60,11 @@ function Schedule() {
         <div className="schedule-greeting">
           <h5>Check out our Schedule</h5>
         </div>
+        <div className="schedule-cards-container">
           {printScheduleCards}
-          <div>
-            <button onClick={handleAllFutureEvents} className="btn btn-light see-more-scheduled-events-btn">See More Events</button>
+        </div>
+          <div className="change-schedule-view-btn-container">
+            <button onClick={handleAllFutureEvents} className="btn change-schedule-view-btn">See More Events</button>
           </div>
       </div>
     );
