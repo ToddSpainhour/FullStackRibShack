@@ -38,6 +38,14 @@ function Schedule() {
     }
   };
 
+  let toggleScheduledEventsViewButton;
+
+  if (onlyViewingNextFiveEvents) {
+    toggleScheduledEventsViewButton = <button onClick={handleAllFutureEvents} className="btn change-schedule-view-btn">See More Events</button>;
+  } else {
+    toggleScheduledEventsViewButton = <button onClick={handleAllFutureEvents} className="btn change-schedule-view-btn">See Less Events</button>;
+  }
+
   let printScheduleCards;
 
   useEffect(() => {
@@ -64,7 +72,8 @@ function Schedule() {
           {printScheduleCards}
         </div>
           <div className="change-schedule-view-btn-container">
-            <button onClick={handleAllFutureEvents} className="btn change-schedule-view-btn">See More Events</button>
+            {/* <button onClick={handleAllFutureEvents} className="btn change-schedule-view-btn">See More Events</button> */}
+            {toggleScheduledEventsViewButton}
           </div>
       </div>
     );
