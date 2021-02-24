@@ -72,7 +72,6 @@ function Schedule() {
           {printScheduleCards}
         </div>
           <div className="change-schedule-view-btn-container">
-            {/* <button onClick={handleAllFutureEvents} className="btn change-schedule-view-btn">See More Events</button> */}
             {toggleScheduledEventsViewButton}
           </div>
       </div>
