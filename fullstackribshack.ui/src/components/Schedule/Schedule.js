@@ -6,6 +6,9 @@ import './Schedule.scss';
 
 function Schedule() {
   const [nextFiveScheduledEvents, setNextFiveScheduledEvents] = useState('');
+  const [allFutureEvents, setAllFutureEvents] = useState('');
+  // eslint-disable-next-line prefer-const
+  let [onlyViewingNextFiveEvents, setOnlyViewingNextFiveEvents] = useState(true);
 
   const getNextFiveEvents = () => {
     scheduleData.getNextFiveScheduledEvents()
@@ -15,27 +18,62 @@ function Schedule() {
       .catch((error) => console.error(`Error: ${error}`));
   };
 
+  const getAllFutureEvents = () => {
+    scheduleData.getAllFutureScheduledEvents()
+      .then((response) => {
+        setAllFutureEvents(response);
+      })
+      .catch((error) => console.error(`Error: ${error}`));
+  };
+
+  const handleAllFutureEvents = () => {
+    setOnlyViewingNextFiveEvents(() => !onlyViewingNextFiveEvents);
+  };
+
+  const currentScheduleView = () => {
+    if (onlyViewingNextFiveEvents === true) {
+      getNextFiveEvents();
+    } else {
+      getAllFutureEvents();
+    }
+  };
+
+  let toggleScheduledEventsViewButton;
+
+  if (onlyViewingNextFiveEvents) {
+    toggleScheduledEventsViewButton = <button onClick={handleAllFutureEvents} className="btn change-schedule-view-btn">See More Events</button>;
+  } else {
+    toggleScheduledEventsViewButton = <button onClick={handleAllFutureEvents} className="btn change-schedule-view-btn">See Less Events</button>;
+  }
+
   let printScheduleCards;
 
   useEffect(() => {
-    getNextFiveEvents();
-  }, []);
+    currentScheduleView();
+  }, [onlyViewingNextFiveEvents]);
 
-  if (nextFiveScheduledEvents.length > 0) {
+  if (onlyViewingNextFiveEvents === true && nextFiveScheduledEvents.length > 0) {
     printScheduleCards = nextFiveScheduledEvents.map((event) => (
       <SingleScheduleCard event={event} key={event.id}/>
     ));
+  } else if (onlyViewingNextFiveEvents === false && allFutureEvents.length > 0) {
+    printScheduleCards = allFutureEvents.map((event) => (<SingleScheduleCard event={event} key={event.id}/>));
   } else {
     return <h3>Loading...</h3>;
   }
 
-  if (nextFiveScheduledEvents.length > 0) {
+  if (nextFiveScheduledEvents.length > 0 || allFutureEvents.length > 0) {
     return (
       <div className="Schedule">
         <div className="schedule-greeting">
           <h5>Check out our Schedule</h5>
         </div>
+        <div className="schedule-cards-container">
           {printScheduleCards}
+        </div>
+          <div className="change-schedule-view-btn-container">
+            {toggleScheduledEventsViewButton}
+          </div>
       </div>
     );
   }
