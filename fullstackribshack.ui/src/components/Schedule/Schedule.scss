@@ -1,8 +1,6 @@
 @import '../../styles/variables';
 
 .Schedule {
-  display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   background-color: $color-1;
 
@@ -11,5 +9,20 @@
     width: 100%;
     padding: 10px;
     background-color: $color-4;
+  }
+
+  .schedule-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+
+  .change-schedule-view-btn-container {
+    display: flex;  
+    justify-content: center;
+    .change-schedule-view-btn {
+      background-color: $color-3;
+    }
   }
 }
