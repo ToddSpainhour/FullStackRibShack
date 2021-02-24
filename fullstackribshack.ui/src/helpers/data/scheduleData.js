@@ -2,11 +2,11 @@ import axios from 'axios';
 import baseUrl from './constants';
 
 const getNextFiveScheduledEvents = () => new Promise((resolve, reject) => {
-  let AllEvents = [];
+  let nextFiveEvents = [];
   axios.get(`${baseUrl}/schedule/nextFiveScheduledEvents`)
     .then((response) => {
-      AllEvents = response.data;
-      resolve(AllEvents);
+      nextFiveEvents = response.data;
+      resolve(nextFiveEvents);
     })
     .catch((error) => reject(error));
 });
