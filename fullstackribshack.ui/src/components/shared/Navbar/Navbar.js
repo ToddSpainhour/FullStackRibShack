@@ -5,7 +5,7 @@ import './Navbar.scss';
 function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-    <a className="navbar-brand" href="#">Full Stack Rib Shack</a>
+    <a className="navbar-brand" href="#app-component">Full Stack Rib Shack</a>
     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
@@ -14,15 +14,15 @@ function Navbar() {
       <ul className="navbar-nav mr-auto">
 
         <li className="nav-item">
-          <a className="nav-link" href="#">Menu</a>
+          <a className="nav-link" href="menu-component">Menu</a>
         </li>
 
         <li className="nav-item">
-          <a className="nav-link" href="#">Schedule</a>
+          <a className="nav-link" href="#schedule-component">Schedule</a>
         </li>
 
         <li className="nav-item">
-          <a className="nav-link" href="#" tabIndex="-1" aria-disabled="true">About Us</a>
+          <a className="nav-link" href="#about-us-component">About Us</a>
         </li>
 
       </ul>
