@@ -64,7 +64,7 @@ function Schedule() {
 
   if (nextFiveScheduledEvents.length > 0 || allFutureEvents.length > 0) {
     return (
-      <div className="Schedule">
+      <div className="Schedule" id="schedule-component">
         <div className="schedule-greeting">
           <h5>Check out our Schedule</h5>
         </div>
