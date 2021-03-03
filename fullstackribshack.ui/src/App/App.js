@@ -1,4 +1,4 @@
-import Navbar from '../components/shared/Navbar/Navbar';
+import MyNavbar from '../components/shared/MyNavbar/MyNavbar';
 import Schedule from '../components/Schedule/Schedule';
 
 import './App.scss';
@@ -6,7 +6,7 @@ import './App.scss';
 function App() {
   return (
     <div className="App" id="app-component">
-      <Navbar />
+      <MyNavbar />
       <Schedule />
     </div>
   );
