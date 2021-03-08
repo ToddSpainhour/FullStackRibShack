@@ -2,7 +2,7 @@ import './MyNavbar.scss';
 import { useState } from 'react';
 
 function MyNavbar() {
-  const [isNavbarCollapsed, setNavbarCollapsed] = useState(false);
+  const [isNavbarCollapsed, setNavbarCollapsed] = useState(true);
 
   const handleNavbarCollapse = () => setNavbarCollapsed(!isNavbarCollapsed);
 
