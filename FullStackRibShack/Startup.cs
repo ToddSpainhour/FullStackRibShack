@@ -29,6 +29,8 @@ namespace FullStackRibShack
             services.AddControllers();
 
             services.AddTransient<ScheduleRepository>();
+            services.AddTransient<MenuCategoryRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
