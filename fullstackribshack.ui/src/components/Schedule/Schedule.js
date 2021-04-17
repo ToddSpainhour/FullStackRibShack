@@ -59,7 +59,7 @@ function Schedule() {
   } else if (onlyViewingNextFiveEvents === false && allFutureEvents.length > 0) {
     printScheduleCards = allFutureEvents.map((event) => (<SingleScheduleCard event={event} key={event.id}/>));
   } else {
-    return <h3>Loading...</h3>;
+    return <h3>No Future Scheduled Events.</h3>;
   }
 
   if (nextFiveScheduledEvents.length > 0 || allFutureEvents.length > 0) {
@@ -77,7 +77,7 @@ function Schedule() {
       </div>
     );
   }
-  return (<h3>Loading...</h3>);
+  return (<h3>No Future Scheduled Events.</h3>);
 }
 
 export default Schedule;
