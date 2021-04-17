@@ -2,6 +2,15 @@
 
 .SingleMenuCategoryCard {
   display: block;
-  background-color: $color-5;
+  background-color: $color-4;
+
+  .menu-category-title {
+    color: $color-3;
+    background: $color-5;
+    text-align: center;
+    font-weight: bold;
+    font-size: large;
+    padding: 20px;
+  }
 }
 

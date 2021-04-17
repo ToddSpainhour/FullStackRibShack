@@ -32,7 +32,9 @@ function Menu() {
   return (
     <div className="Menu">
       <h2>Menu Component</h2>
-      {printMenuCategories}
+      <div className="menu-category-container">
+        {printMenuCategories}
+      </div>
     </div>
   );
 }

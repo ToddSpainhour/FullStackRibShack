@@ -4,8 +4,8 @@ import './SingleMenuCategoryCard.scss';
 
 function SingleMenuCategoryCard(props) {
   return (
-    <div className='SingleMenuCategoryCard'>
-      <p>{props.category.menuCategory}</p>
+    <div className='SingleMenuCategoryCard col-4'>
+      <p className="menu-category-title">{props.category.menuCategory}</p>
     </div>
   );
 }
