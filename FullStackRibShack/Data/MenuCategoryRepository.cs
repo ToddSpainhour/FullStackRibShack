@@ -18,9 +18,12 @@ namespace FullStackRibShack.Data
 
             try
             {
-                var allMenuCategories = db.Query<MenuCategoryModel>
+                var allMenuCategories = db.Query < MenuCategoryModel >
 
-                    ("SELECT * FROM MenuCategory");
+                    ("SELECT MenuItem.*, MenuCategory.MenuCategory " +
+                    "FROM MenuItem " +
+                    "JOIN MenuCategory ON MenuItem.MenuCategoryId = MenuCategory.Id");
+
 
                 return allMenuCategories.ToList();
             }
