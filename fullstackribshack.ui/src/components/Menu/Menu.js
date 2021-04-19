@@ -23,13 +23,15 @@ function Menu() {
 
   const menuCategoriesAndIds = [];
 
+  // I need to only pass down menuDetails that apply to this menuCategory.Each category does not need access to the whole menu
+
   if (menuDetails.length > 0) {
     menuDetails.map((category) => menuCategoriesAndIds.push(category.menuCategory));
 
     const onlyUnique = [...new Set(menuCategoriesAndIds)];
 
     printMenuCategories = onlyUnique.map((menuCategory) => (
-      <SingleMenuCategoryCard menuCategory={menuCategory} menuDetails={menuDetails}/>
+        <SingleMenuCategoryCard key={menuCategory} menuCategory={menuCategory} menuDetails={menuDetails}/>
     ));
   }
 
