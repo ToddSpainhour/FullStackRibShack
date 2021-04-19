@@ -5,42 +5,31 @@ import SingleMenuCategoryCard from '../SingleMenuCategoryCard/SinlgeMenuCategory
 import './Menu.scss';
 
 function Menu() {
-  const [menuCategories, setMenuCategories] = useState('');
-  // const [onlyCategories, setOnlyCategories] = useState('');
+  const [menuDetails, setMenuDetails] = useState('');
 
-  const getMenuCategories = () => {
-    // console.log('inside getMenuCategories');
+  const getMenuDetails = () => {
     MenuData.getAllMenuCategories()
       .then((response) => {
-        setMenuCategories(response);
+        setMenuDetails(response);
       })
       .catch((error) => console.error(`Error: ${error}`));
   };
 
-  if (menuCategories.length < 1) {
-    getMenuCategories();
+  if (menuDetails.length < 1) {
+    getMenuDetails();
   }
 
   let printMenuCategories;
 
-  // if (menuCategories.length > 0) {
-  //   printMenuCategories = menuCategories.map((category) => (
-  //     <SingleMenuCategoryCard category={category} key={category.id}/>
-  //   ));
-  // }
-
   const menuCategoriesAndIds = [];
 
-  if (menuCategories.length > 0) {
-    // console.error('props.menuCategories above filter:', menuCategories);
-    menuCategories.map((category) => menuCategoriesAndIds.push(category.menuCategory));
-    // menuCategories.map((category) => menuCategoriesAndIds.push({ menuCategory: category.menuCategory }));
-    // console.error('menuCategoriesAndIds', menuCategoriesAndIds);
+  if (menuDetails.length > 0) {
+    menuDetails.map((category) => menuCategoriesAndIds.push(category.menuCategory));
+
     const onlyUnique = [...new Set(menuCategoriesAndIds)];
-    console.error('onlyUnique', onlyUnique);
 
     printMenuCategories = onlyUnique.map((menuCategory) => (
-      <SingleMenuCategoryCard menuCategory={menuCategory}/>
+      <SingleMenuCategoryCard menuCategory={menuCategory} menuDetails={menuDetails}/>
     ));
   }
 
