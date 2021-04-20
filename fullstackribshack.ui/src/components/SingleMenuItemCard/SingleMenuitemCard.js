@@ -3,15 +3,11 @@ import React from 'react';
 import './SingleMenuItemCard.scss';
 
 function SingleMenuItemCard(props) {
-  // if menuDetails.menuCategory === menuCategory ..print it
-  // let menuItem;
-  // if (props.menuDetails.menuCategory !== props.menuCategory) {
-  //   menuItem = <p>{props.menuDetails.name}</p>;
-  // }
   return (
     <div className="SingleMenuItemCard">
-      <p>Single Menu Item</p>
-      {/* {menuItem} */}
+      <h6>{props.singleMenuItem.name}</h6>
+      <p>{props.singleMenuItem.description}</p>
+      <p>{props.singleMenuItem.price}</p>
     </div>
   );
 }
