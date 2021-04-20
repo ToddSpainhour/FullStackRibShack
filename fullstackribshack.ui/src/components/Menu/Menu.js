@@ -1,32 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import MenuData from '../../helpers/data/MenuData';
 import SingleMenuCategoryCard from '../SingleMenuCategoryCard/SinlgeMenuCategoryCard';
 
 import './Menu.scss';
 
 function Menu() {
-  const [menuCategories, setMenuCategories] = useState('');
+  const [menuDetails, setMenuDetails] = useState('');
 
-  const getMenuCategories = () => {
-    // console.log('inside getMenuCategories');
+  const getMenuDetails = () => {
     MenuData.getAllMenuCategories()
       .then((response) => {
-        console.error('response in Menu.js is:', response);
-        setMenuCategories(response);
+        setMenuDetails(response);
       })
       .catch((error) => console.error(`Error: ${error}`));
   };
 
-  if (menuCategories.length < 1) {
-    getMenuCategories();
+  if (menuDetails.length < 1) {
+    getMenuDetails();
   }
 
   let printMenuCategories;
 
-  if (menuCategories.length > 0) {
-    printMenuCategories = menuCategories.map((category) => (
-      <SingleMenuCategoryCard category={category} key={category.id}/>
-    ));
+  const menuCategoriesAndIds = [];
+
+  if (menuDetails.length > 0) {
+    menuDetails.map((category) => menuCategoriesAndIds.push(category.menuCategory));
+
+    const onlyUnique = [...new Set(menuCategoriesAndIds)];
+
+    printMenuCategories = onlyUnique.map((menuCategory) => (<SingleMenuCategoryCard key={menuCategory} menuCategory={menuCategory} menuDetails={menuDetails}/>));
   }
 
   return (
